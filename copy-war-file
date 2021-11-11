@@ -14,7 +14,9 @@ pipeline {
          }
         stage ("Sonar Publish") {
             steps {
-                sh "/opt/maven/bin/mvn sonar:sonar"
+               withSonarQubeEnv('santusonar') {
+                    sh "/opt/maven/bin/mvn sonar:sonar"
+                }
              }
          }
          
