@@ -18,14 +18,13 @@ pipeline {
              }
          }
          
-        stage ("Sonar Quality Gate checks") {
-              
-             steps {
-                script {
-                    timeout{time: 1, unit: "HOURS") {
-                        def qg = waitForQualityGate()
-                        if (qg.status != "OK") {
-                               error "Aborted the pipeline due to Quqlity checks failed: ${qg.status}"
+        stage("Quality Gate Status Check"){
+              steps{
+                  script{
+                       timeout(time: 1, unit: 'HOURS') {
+                             def qg = waitForQualityGate()
+                             if (qg.status != 'OK') {
+                                 error "Pipeline aborted due to quality gate failure: ${qg.status}"
                              }
                      }
                  }
