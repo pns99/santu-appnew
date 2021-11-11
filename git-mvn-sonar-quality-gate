@@ -24,7 +24,7 @@ pipeline {
         stage ("Sonar Quality Gate status Checks") {
               steps {
                  script {
-                    timeout("time: 1, unit: "HOURS") {
+                    timeout(time: 1, unit: "HOURS") {
                         def gg = waitForQulityGate()
                         if (gg.status != "OK") {
                             error "Aborting the pipeline due to Quality Gate failed: ${gg.status}"
