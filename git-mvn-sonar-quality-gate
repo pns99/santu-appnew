@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+    stages {
+        stage ("Git Checkout") {
+            steps {
+                git branch: "main", url: "https://github.com/pns99/santu-appnew.git"
+            }
+        }
+        stage ("Maven Build") {
+        
+            steps {
+                sh "/opt/maven/bin/mvn clean package -DskipTests=true"
+            }
+        }
+        
+        stage ("Sonar Publish") {
+              steps {
+                  withSonarQubeEnv("santusonar") {
+                      sh "/opt/maven/bin/mvn sonar:sonar"
+                  }
+              }
+        }
+        
+        stage ("Sonar Quality Gate status Checks") {
+              steps {
+                 script {
+                    timeout("time: 1, unit: "HOURS"){
+                        def gg = waitForQulityGate()
+                        if (gg.status != "OK"){
+                            error "Aborting the pipeline due to Quality Gate failed: ${gg.status}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+ 
+}
+    
+       
+       
+         
+       
+                
+              
+        
+        
+                
+                
+          
+              
