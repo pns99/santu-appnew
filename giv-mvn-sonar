@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
         stage ("Git Checkout") {
-            stapes {
+            steps {
                 git branch: "main", url: "https://github.com/pns99/santu-appnew.git"
                 }
             }
