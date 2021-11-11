@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+    stages {
+        stage("Git Checkout") {
+             steps {
+                git branch: "main", url: "https://github.com/pns99/santu-appnew.git"
+             }
+        }
+        
+        stage ("Maven Build") {
+             steps {
+                sh "/opt/maven/bin/mvn clean packge -DskipTests=true"
+             }
+         }
+        stage ("Sonar Publish") {
+            steps {
+                sh "/opt/maven/bin/mvn sonar:sonar"
+             }
+         }
+         
+        stage ("Sonar Quality Gate checks") {
+              
+             steps {
+                script {
+                    timeout{time: 1, unit: "HOURS") {
+                        def qg = waitForQualityGate()
+                            if (qg.status != "OK") {
+                               error "Aborted the pipeline due to Quqlity checks failed: ${qg.status}"
+                             }
+                     }
+                 }
+            }
+        }
+        
+        stage (Deploy war file") {
+           steps {
+              sh "scp target/*.war santu@192.168.130.191:/opt/apps/tomcat8/"
+           }
+        }
+        
+     }
+  }
+              
+           
+          
+          
+           
+             
+                
+            
+      
