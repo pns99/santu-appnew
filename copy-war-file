@@ -31,7 +31,7 @@ pipeline {
             }
         }
         
-        stage (Deploy war file") {
+        stage ("Deploy war file") {
            steps {
               sh "scp target/*.war santu@192.168.130.191:/opt/apps/tomcat8/"
            }
