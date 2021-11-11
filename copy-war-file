@@ -9,7 +9,7 @@ pipeline {
         
         stage ("Maven Build") {
              steps {
-                sh "/opt/maven/bin/mvn clean packge -DskipTests=true"
+                sh "/opt/maven/bin/mvn clean package -DskipTests=true"
              }
          }
         stage ("Sonar Publish") {
