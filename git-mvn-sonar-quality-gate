@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ("Git Checkout") {
             steps {
-                git branch: "main", url: "https://github.com/pns99/santu-appnew.git"
+                git branch: "main", url: "https://github.com/pns99/santu-sonar.git"
             }
         }
         stage ("Maven Build") {
