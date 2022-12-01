@@ -9,14 +9,14 @@ pipeline {
         stage ("Maven Build") {
         
             steps {
-                sh "/opt/maven/bin/mvn clean package -DskipTests=true"
+                sh "mvn clean package -DskipTests=true"
             }
         }
         
         stage ("Sonar Publish") {
               steps {
-                  withSonarQubeEnv("santusonar") {
-                      sh "/opt/maven/bin/mvn sonar:sonar"
+                  withSonarQubeEnv("sonar") {
+                      sh "mvn sonar:sonar"
                   }
               }
         }
