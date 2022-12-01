@@ -9,7 +9,7 @@ pipeline {
         stage ("Maven Build") {
         
             steps {
-                sh "mvn clean package -DskipTests=true"
+                sh "/opt/apache-maven-3.8.6/bin/mvn clean package -DskipTests=true"
             }
         }
         
