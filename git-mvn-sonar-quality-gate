@@ -34,9 +34,9 @@ pipeline {
             }
         }
         stage ("UploadToNexus") {
-            staeps {
+            steps {
                 scripts {
-                    UploadToNexus()
+                    UploadtoNexus()
                 }
             }
             
@@ -45,7 +45,7 @@ pipeline {
     }
  
 }
-def UploadToNexus() {
+def UploadtoNexus() {
     nexusArtifactUploader artifacts: [[artifactId: 'myweb', classifier: '', file: 'githubsonar/target/myweb-0.0.1.war', type: 'war']], credentialsId: 'nexus3', groupId: 'nexu3', nexusUrl: '192.168.145.131:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'Jenkinstest', version: '${BUILD_NUMBER}'
 }
        
