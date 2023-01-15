@@ -15,7 +15,7 @@ pipeline {
       
       stage {
         steps {
-            echo "jtest 2"
+            echo "jtest 2
           
         }
         
