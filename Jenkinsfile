@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+        stage ("Git mvn hellocheckout") {
+            steps {
+            git branch: "main", url: "https://github.com/pns99/santu-appnew.git"
+            }
+        }
+        
+        stage ("Maven Build") {
+            steps {
+                  sh "/opt/maven/bin/mvn clean package -DskipTests=true"
+                  }
+        }
+        
+    }
+}    
