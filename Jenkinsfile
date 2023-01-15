@@ -7,15 +7,22 @@ pipeline {
             }
         }
         
-        stage ("Maven Build") {
+        stage ("jtest") {
             steps {
-                  sh "/opt/maven/bin/mvn clean package -DskipTests=true"
+                  echo "jtest 1"
                   }
         }
       
       stage {
         steps {
-          sh "docker images"
+            echo "jtest 2"
+          
+        }
+        
+      }
+      stage {
+        steps {
+            echo "jtest 3"
           
         }
         
